@@ -4,15 +4,18 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QMainWindow, QTableWidgetItem
+from addEditCoffeeForm import Ui_MainWindow_1
+from main_ui import Ui_MainWindow_2
 
 
-class Yes(QMainWindow):
+class Yes(QMainWindow, Ui_MainWindow_1):
     def __init__(self, main):
         self.main = main
         super().__init__()
-        uic.loadUi('addEditCoffeeForm.ui', self)
+        #uic.loadUi('addEditCoffeeForm.ui', self)
+        self.setupUi(self)
         self.setFixedSize(self.size().width(), self.size().height())
-        self.connection = sqlite3.connect("coffee.db")
+        self.connection = sqlite3.connect("data/coffee.db")
         self.lines = [self.lineEdit, self.lineEdit_2,self.lineEdit_3,
                   self.lineEdit_4,self.lineEdit_5,self.lineEdit_6]
         self.flag = False
@@ -49,12 +52,13 @@ class Yes(QMainWindow):
             return
 
 
-class MyWidget(QMainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow_2):
     def __init__(self):
         super().__init__()
-        uic.loadUi('main.ui', self)
+        #uic.loadUi('main.ui', self)
+        self.setupUi(self)
         self.setFixedSize(self.size().width(), self.size().height())
-        self.sqlconnect = sqlite3.connect("coffee.db")
+        self.sqlconnect = sqlite3.connect("data/coffee.db")
         self.loadTable()
         self.pushButton.clicked.connect(self.add)
         self.pushButton_2.clicked.connect(self.edit)
